@@ -39,7 +39,12 @@ public class Playerscript : MonoBehaviour
             PlaySound(missiles);
         }
 
-        if (currentHealth <= 0)
+        if (Input.GetKeyDown("g"))
+        {
+            UseHeal();
+        }
+
+            if (currentHealth <= 0)
         {
             Debug.Log("Game over");
             Destroy(gameObject);
@@ -52,6 +57,18 @@ public class Playerscript : MonoBehaviour
         position.x = Mathf.Clamp(position.x + speed * horizontal * Time.deltaTime, -9, 9);
         position.y = Mathf.Clamp(position.y + speed * vertical * Time.deltaTime, -3, 7);
         _rb.MovePosition(position);
+    }
+
+    public GameObject Potion;
+
+    void UseHeal()
+    {
+        Potions potion = Potion.GetComponent<Potions>();
+        if (potion.Remove() && currentHealth < maxhealth)
+        {
+            currentHealth += potion.healAmount;
+            healthBar.SetHealth(currentHealth);
+        }
     }
 
     public GameObject projectilePrefab;
