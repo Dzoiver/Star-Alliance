@@ -27,7 +27,6 @@ public class enemyProjectile : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        Debug.Log("collision");
         Playerscript p = other.collider.GetComponent<Playerscript>();
         if (p != null)
         {

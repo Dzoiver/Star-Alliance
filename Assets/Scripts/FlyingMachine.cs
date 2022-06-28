@@ -9,15 +9,27 @@ public class FlyingMachine : MonoBehaviour
     float speed = 3f;
     float attackRate = 3f;
     float currentTime = 3f;
-    public GameObject waypoint = null;
+    public GameObject waypoint;
     Vector3 lookDirection = new Vector3(0, -1, 0);
     public EnemyHPBar healthBar;
+
+    Vector3 movevect;
 
     // Start is called before the first frame update
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
         healthBar.SetMaxHealth(health);
+        getRandomPosition();
+    }
+
+    void OnCollisionEnter(Collision col)
+    {
+        
+        if (col.gameObject.tag == "Enemy")
+        {
+            getRandomPosition();
+        }
     }
 
     // Update is called once per frame
@@ -35,12 +47,22 @@ public class FlyingMachine : MonoBehaviour
             Destroy(gameObject);
             GameDirector.enemyCount--;
         }
-
+        /*
         if (waypoint != null)
         {
             transform.position = Vector3.MoveTowards(transform.position, waypoint.transform.position, speed * Time.deltaTime);
         }
+        */
+
+        transform.position = Vector3.MoveTowards(transform.position, movevect, speed * Time.deltaTime);
     }
+    void getRandomPosition()
+    {
+        movevect.x = Random.Range(-8f, 8f);
+        movevect.y = Random.Range(1f, 4f);
+        movevect.z = 0;
+    }
+
     public GameObject projectilePrefab;
 
     void ShootMissiles()

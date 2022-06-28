@@ -9,8 +9,15 @@ public class Playerscript : MonoBehaviour
     float speed = 5f;
     float horizontal;
     float vertical;
+    float gutlingLastFired = 0f;
+    float gutlingInterval = 0.2f;
     Rigidbody _rb;
     Vector3 lookDirection = new Vector3(0, 1, 0);
+
+    public GameObject attackSphere;
+    SphereAttack sphereScript;
+    float sphereTimeDelay = 2.2f;
+    float currentSphereTime = 3f;
 
     public Healthbar healthBar;
 
@@ -22,6 +29,7 @@ public class Playerscript : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         healthBar.SetMaxHealth(maxhealth);
+        sphereScript = attackSphere.GetComponent<SphereAttack>();
     }
 
     // Update is called once per frame
@@ -29,25 +37,41 @@ public class Playerscript : MonoBehaviour
     {
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
+        gutlingLastFired += Time.deltaTime;
 
         Vector2 move = new Vector2(horizontal, vertical);
 
-        if (Input.GetKeyDown("space"))
+        if (Input.GetKey("space") && gutlingLastFired > gutlingInterval)
         {
-            Debug.Log("Throw missiles");
+            gutlingLastFired = 0f;
             ShootMissiles();
             PlaySound(missiles);
         }
 
-        if (Input.GetKeyDown("g"))
+        if (Input.GetKeyDown("j"))
         {
             UseHeal();
         }
 
-            if (currentHealth <= 0)
+        if (currentHealth <= 0)
         {
             Debug.Log("Game over");
             Destroy(gameObject);
+        }
+
+        currentSphereTime += Time.deltaTime;
+        if (Input.GetKeyDown("i") && currentSphereTime > sphereTimeDelay)
+        {
+            currentSphereTime = 0f;
+            sphereScript.Attack();
+        }
+        if (Input.GetKeyDown("l"))
+        {
+            Debug.Log("Melee swing attack");
+        }
+        if (Input.GetKeyDown("o"))
+        {
+            Debug.Log("Special attack");
         }
     }
     void FixedUpdate()
