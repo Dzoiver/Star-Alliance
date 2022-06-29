@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &9078441023501597039
 RectTransform:
   m_ObjectHideFlags: 0
@@ -396,7 +396,7 @@ RectTransform:
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -738,6 +738,8 @@ MonoBehaviour:
   waypoint: {fileID: 0}
   healthBar: {fileID: 5758158164204783144}
   potionPrefab: {fileID: 7368989880452229609, guid: ccbc1a756b6a0b945a165bda2180fe27,
+    type: 3}
+  TempDmgPrefab: {fileID: 3581025115056577185, guid: d20136ddaff56b142ba9128746ee2adb,
     type: 3}
   projectilePrefab: {fileID: 6138462629818652610, guid: 385e97af0ce67b54bb886f267c1e8022,
     type: 3}

@@ -13,6 +13,7 @@ public class FlyingMachine : MonoBehaviour
     Vector3 lookDirection = new Vector3(0, -1, 0);
     public EnemyHPBar healthBar;
     float potionChance = 0.05f;
+    float tempDmgChance = 0.05f;
 
     Vector3 movevect;
 
@@ -65,16 +66,18 @@ public class FlyingMachine : MonoBehaviour
         float rndChance = Random.Range(0f, 1f);
         if (rndChance < potionChance)
         {
-            DropPotion();
+            DropItem(potionPrefab);
         }
-        Debug.Log(rndChance);
+        else if (rndChance < tempDmgChance * 2)
+        {
+            DropItem(TempDmgPrefab);
+        }
     }
     public GameObject potionPrefab;
-    void DropPotion()
+    public GameObject TempDmgPrefab;
+    void DropItem(GameObject prefab)
     {
-        GameObject potionObject = Instantiate(potionPrefab, transform.position, Quaternion.identity);
-        /*enemyProjectile projectile = projectileObject.GetComponent<enemyProjectile>();
-        projectile.Launch(lookDirection, 300);*/
+        Instantiate(prefab, transform.position, Quaternion.identity);
     }
     void GetRandomPosition()
     {

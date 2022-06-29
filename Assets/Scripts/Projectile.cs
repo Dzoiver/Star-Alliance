@@ -5,11 +5,15 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     Rigidbody rigidbody;
-    float projectileDamage = 1f;
 
     void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
+        Vector3 scale = new Vector3(0, 0, 0);
+        scale.x = transform.localScale.x * Playerscript.instance.gutlingSize;
+        scale.y = transform.localScale.y * Playerscript.instance.gutlingSize;
+        scale.z = transform.localScale.z * Playerscript.instance.gutlingSize;
+        transform.localScale = scale;
     }
     // Start is called before the first frame update
     public void Launch(Vector2 direction, float force)
@@ -19,7 +23,7 @@ public class Projectile : MonoBehaviour
 
     void Update()
     {
-        if (transform.position.magnitude > 70.0f)
+        if (transform.position.magnitude > 60.0f)
         {
             Destroy(gameObject);
         }
@@ -30,7 +34,7 @@ public class Projectile : MonoBehaviour
         FlyingMachine e = other.collider.GetComponent<FlyingMachine>();
         if (e != null)
         {
-            e.TakeDamage(projectileDamage);
+            e.TakeDamage(Playerscript.instance.gutlingDamage);
         }
 
         Destroy(gameObject);

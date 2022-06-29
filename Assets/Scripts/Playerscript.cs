@@ -2,13 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+class Powerup
+{
+    public float time = 0f;
+    public string name = "";
+    public Powerup(float t, string n)
+    {
+        time = t;
+        name = n;
+    }
+}
 public class Playerscript : MonoBehaviour
 {
+    public static Playerscript instance;
     float maxhealth = 3f;
     float currentHealth = 3f;
     float speed = 5f;
     float horizontal;
     float vertical;
+    List<Powerup> powerUps = new List<Powerup>();
+
+    public float gutlingSize = 1f;
+    public float gutlingDamage = 1f;
     float gutlingLastFired = 0f;
     float gutlingInterval = 0.2f;
     Rigidbody _rb;
@@ -23,6 +38,10 @@ public class Playerscript : MonoBehaviour
 
     AudioSource audioSource;
 
+    private void Awake()
+    {
+        instance = this;
+    }
     public AudioClip missiles;
     // Start is called before the first frame update
     void Start()
@@ -73,6 +92,44 @@ public class Playerscript : MonoBehaviour
         {
             Debug.Log("Special attack");
         }
+
+/*        HandlePowerUps();*/
+
+        for (int i = 0; i < powerUps.Count; i++)
+        {
+
+            if (powerUps[i].time > 0f)
+            {
+                UI.instance.PUp.SetActive(true);
+                powerUps[i].time -= Time.deltaTime;
+            }
+            else
+            {
+                if (powerUps[i].name == "Attack PowerUp")
+                {
+                    if (powerUps.Count <= 1)
+                    UI.instance.PUp.SetActive(false);
+                    RemoveAttackPowerUp();
+                    powerUps.RemoveAt(i);
+                }
+            }
+        }
+    }
+
+    void HandlePowerUps()
+    {
+
+    }
+    void RemoveAttackPowerUp()
+    {
+        gutlingDamage -= 1f;
+        gutlingSize -= 0.6f;
+    }
+    public void AttackPowerup()
+    {
+        gutlingDamage += 1f;
+        gutlingSize += 0.6f;
+        powerUps.Add(new Powerup(30f, "Attack PowerUp"));
     }
     void FixedUpdate()
     {
