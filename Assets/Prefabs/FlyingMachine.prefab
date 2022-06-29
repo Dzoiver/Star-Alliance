@@ -737,6 +737,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waypoint: {fileID: 0}
   healthBar: {fileID: 5758158164204783144}
+  potionPrefab: {fileID: 7368989880452229609, guid: ccbc1a756b6a0b945a165bda2180fe27,
+    type: 3}
   projectilePrefab: {fileID: 6138462629818652610, guid: 385e97af0ce67b54bb886f267c1e8022,
     type: 3}
 --- !u!54 &6266996616426972968

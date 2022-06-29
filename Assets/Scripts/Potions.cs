@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Potions : MonoBehaviour
 {
+    public static Potions instance;
     int currentPotions = 10;
     int maxPotions = 10;
     public float healAmount = 1f;
@@ -14,6 +15,10 @@ public class Potions : MonoBehaviour
     public GameObject UIText;
     Text potionText;
 
+    private void Awake()
+    {
+        instance = this;
+    }
     public void Add()
     {
         currentPotions++;

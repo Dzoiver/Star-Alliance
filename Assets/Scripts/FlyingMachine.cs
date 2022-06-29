@@ -6,12 +6,13 @@ public class FlyingMachine : MonoBehaviour
 {
     Rigidbody _rb;
     float health = 3f;
-    float speed = 3f;
+    float speed = 4f;
     float attackRate = 3f;
     float currentTime = 3f;
     public GameObject waypoint;
     Vector3 lookDirection = new Vector3(0, -1, 0);
     public EnemyHPBar healthBar;
+    float potionChance = 0.05f;
 
     Vector3 movevect;
 
@@ -44,9 +45,7 @@ public class FlyingMachine : MonoBehaviour
 
         if (health <= 0)
         {
-            Destroy(gameObject);
-            GameDirector.enemyCount--;
-            Waypoints.instance.RestoreWaypoint(movevect);
+            Death();
         }
         /*
         if (waypoint != null)
@@ -56,6 +55,26 @@ public class FlyingMachine : MonoBehaviour
         */
 
         transform.position = Vector3.MoveTowards(transform.position, movevect, speed * Time.deltaTime);
+    }
+
+    void Death()
+    {
+        Destroy(gameObject);
+        GameDirector.enemyCount--;
+        Waypoints.instance.RestoreWaypoint(movevect);
+        float rndChance = Random.Range(0f, 1f);
+        if (rndChance < potionChance)
+        {
+            DropPotion();
+        }
+        Debug.Log(rndChance);
+    }
+    public GameObject potionPrefab;
+    void DropPotion()
+    {
+        GameObject potionObject = Instantiate(potionPrefab, transform.position, Quaternion.identity);
+        /*enemyProjectile projectile = projectileObject.GetComponent<enemyProjectile>();
+        projectile.Launch(lookDirection, 300);*/
     }
     void GetRandomPosition()
     {
