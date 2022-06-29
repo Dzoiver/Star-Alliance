@@ -4,36 +4,35 @@ using UnityEngine;
 
 public class Waypoints : MonoBehaviour
 {
-    
-    Transform[] allChildren;
-    // Start is called before the first frame update
-    void Start()
+    int randomInt = 0;
+    public static Waypoints instance;
+    [SerializeField] List<Transform> allChildren;
+    List<Vector3> positions = new List<Vector3>();
+
+    private void Awake()
     {
-        allChildren = GetComponentsInChildren<Transform>();
-        /*for (int i = 0; i < allChildren.Length; i++)
+        instance = this;
+        for (int i = 0; i < allChildren.Count; i++)
         {
-
-        }*/
-
+            positions.Add(allChildren[i].position);
+        }
     }
+    // Start is called before the first frame update
 
-    public Vector3 getRandomWaypoint()
+    public Vector3 GetRandomWaypoint()
     {
-        int randomInt = Random.Range(0, allChildren.Length);
-        allChildren[randomInt].gameObject.SetActive(false);
-        Debug.Log(allChildren.Length);
-        allChildren = GetComponentsInChildren<Transform>();
-        Debug.Log(allChildren.Length);
-        return allChildren[randomInt].position;
+        randomInt = Random.Range(0, positions.Count);
+        Vector3 returnPos = positions[randomInt];
+        positions.RemoveAt(randomInt);
+        // allChildren[randomInt].gameObject.SetActive(false);
+        return returnPos;
         //foreach (Transform child in allChildren)
         //{
         //    child.gameObject.SetActive(false);
         //}
     }
-
-    // Update is called once per frame
-    void Update()
+    public void RestoreWaypoint(Vector3 vect)
     {
-        
+        positions.Add(vect);
     }
 }

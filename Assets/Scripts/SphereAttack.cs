@@ -21,10 +21,21 @@ public class SphereAttack : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision other)
+   /* void OnCollisionEnter(Collision other)
     {
         Debug.Log("Collision detected");
         FlyingMachine p = other.collider.GetComponent<FlyingMachine>();
+        if (p != null)
+        {
+            Debug.Log("Taking damage");
+            p.TakeDamage(attackDamage);
+        }
+    }*/
+
+    void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Collision detected");
+        FlyingMachine p = other.GetComponent<FlyingMachine>();
         if (p != null)
         {
             Debug.Log("Taking damage");

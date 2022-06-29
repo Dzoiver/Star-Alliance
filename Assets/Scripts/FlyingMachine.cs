@@ -20,17 +20,17 @@ public class FlyingMachine : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         healthBar.SetMaxHealth(health);
-        getRandomPosition();
+        // GetRandomPosition();
     }
 
-    void OnCollisionEnter(Collision col)
+/*    void OnCollisionEnter(Collision col)
     {
         
         if (col.gameObject.tag == "Enemy")
         {
-            getRandomPosition();
+            GetRandomPosition();
         }
-    }
+    }*/
 
     // Update is called once per frame
     void Update()
@@ -46,6 +46,7 @@ public class FlyingMachine : MonoBehaviour
         {
             Destroy(gameObject);
             GameDirector.enemyCount--;
+            Waypoints.instance.RestoreWaypoint(movevect);
         }
         /*
         if (waypoint != null)
@@ -56,11 +57,17 @@ public class FlyingMachine : MonoBehaviour
 
         transform.position = Vector3.MoveTowards(transform.position, movevect, speed * Time.deltaTime);
     }
-    void getRandomPosition()
+    void GetRandomPosition()
     {
-        movevect.x = Random.Range(-8f, 8f);
+        movevect = Waypoints.instance.GetRandomWaypoint();
+/*        movevect.x = Random.Range(-8f, 8f);
         movevect.y = Random.Range(1f, 4f);
-        movevect.z = 0;
+        movevect.z = 0;*/
+    }
+
+    public void SetVectorToMove(Vector3 vect)
+    {
+        movevect = vect;
     }
 
     public GameObject projectilePrefab;

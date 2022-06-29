@@ -46,10 +46,10 @@ public class GameDirector : MonoBehaviour
     void SpawnEnemy()
     {
         enemyCount++;
-        enemyPos.transform.position = getRandomPos();
+        // enemyPos.transform.position = getRandomPos();
         GameObject enemy = Instantiate(enemyPrefab, enemyPos.transform);
         FlyingMachine machine = enemy.GetComponent<FlyingMachine>();
-        machine.waypoint = waypoint;
+        machine.SetVectorToMove(Waypoints.instance.GetRandomWaypoint());
     }
 
     Vector3 getRandomPos()

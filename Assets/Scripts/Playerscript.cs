@@ -16,7 +16,7 @@ public class Playerscript : MonoBehaviour
 
     public GameObject attackSphere;
     SphereAttack sphereScript;
-    float sphereTimeDelay = 2.2f;
+    float sphereTimeDelay = 2f;
     float currentSphereTime = 3f;
 
     public Healthbar healthBar;
