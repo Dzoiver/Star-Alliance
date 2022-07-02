@@ -14,6 +14,7 @@ public class FlyingMachine : MonoBehaviour
     public EnemyHPBar healthBar;
     float potionChance = 0.05f;
     float tempDmgChance = 0.05f;
+    int scoreAmount = 100;
 
     Vector3 movevect;
 
@@ -24,17 +25,6 @@ public class FlyingMachine : MonoBehaviour
         healthBar.SetMaxHealth(health);
         // GetRandomPosition();
     }
-
-/*    void OnCollisionEnter(Collision col)
-    {
-        
-        if (col.gameObject.tag == "Enemy")
-        {
-            GetRandomPosition();
-        }
-    }*/
-
-    // Update is called once per frame
     void Update()
     {
         currentTime += Time.deltaTime;
@@ -48,12 +38,6 @@ public class FlyingMachine : MonoBehaviour
         {
             Death();
         }
-        /*
-        if (waypoint != null)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, waypoint.transform.position, speed * Time.deltaTime);
-        }
-        */
 
         transform.position = Vector3.MoveTowards(transform.position, movevect, speed * Time.deltaTime);
     }
@@ -72,6 +56,8 @@ public class FlyingMachine : MonoBehaviour
         {
             DropItem(TempDmgPrefab);
         }
+
+        Score.instance.AddScore(scoreAmount);
     }
     public GameObject potionPrefab;
     public GameObject TempDmgPrefab;
@@ -82,9 +68,6 @@ public class FlyingMachine : MonoBehaviour
     void GetRandomPosition()
     {
         movevect = Waypoints.instance.GetRandomWaypoint();
-/*        movevect.x = Random.Range(-8f, 8f);
-        movevect.y = Random.Range(1f, 4f);
-        movevect.z = 0;*/
     }
 
     public void SetVectorToMove(Vector3 vect)
