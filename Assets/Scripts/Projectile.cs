@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    Rigidbody rigidbody;
-
+    Vector3 movevect = new Vector3(0, 0, 0);
+    float speed = 11f;
     void Awake()
     {
-        rigidbody = GetComponent<Rigidbody>();
         Vector3 scale = new Vector3(0, 0, 0);
         scale.x = transform.localScale.x * Playerscript.instance.gutlingSize;
         scale.y = transform.localScale.y * Playerscript.instance.gutlingSize;
@@ -18,7 +17,9 @@ public class Projectile : MonoBehaviour
     // Start is called before the first frame update
     public void Launch(Vector2 direction, float force)
     {
-        rigidbody.AddForce(direction * force);
+        movevect.x = transform.position.x;
+        movevect.y = transform.position.y;
+        movevect.z = transform.position.z;
     }
 
     void Update()
@@ -27,11 +28,14 @@ public class Projectile : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        movevect.y = transform.position.y + speed * Time.deltaTime;
+        transform.position = movevect;
     }
 
-    void OnCollisionEnter(Collision other)
+    void OnTriggerEnter(Collider coll)
     {
-        FlyingMachine e = other.collider.GetComponent<FlyingMachine>();
+        FlyingMachine e = coll.GetComponent<FlyingMachine>();
         if (e != null)
         {
             e.TakeDamage(Playerscript.instance.gutlingDamage);

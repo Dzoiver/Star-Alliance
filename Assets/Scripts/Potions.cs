@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Potions : MonoBehaviour
 {
     public static Potions instance;
-    int currentPotions = 10;
+    int currentPotions = 3;
     int maxPotions = 10;
     public float healAmount = 1f;
     // public delegate void OnPotionChanged();

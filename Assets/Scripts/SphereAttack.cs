@@ -6,7 +6,7 @@ public class SphereAttack : MonoBehaviour
 {
     float attackTime = 1f;
     float lastAttackTime = 0f;
-    float attackDamage = 3f;
+    float attackDamage = 4f;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +34,6 @@ public class SphereAttack : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Collision detected");
         FlyingMachine p = other.GetComponent<FlyingMachine>();
         if (p != null)
         {

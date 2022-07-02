@@ -48,6 +48,7 @@ public class enemyProjectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("entered a trigger");
         Playerscript p = other.GetComponent<Playerscript>();
         if (p != null)
         {

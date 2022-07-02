@@ -5,7 +5,7 @@ using UnityEngine;
 public class FlyingMachine : MonoBehaviour
 {
     Rigidbody _rb;
-    float health = 3f;
+    float health = 4f;
     float speed = 4f;
     float attackRate = 3f;
     float currentTime = 3f;
