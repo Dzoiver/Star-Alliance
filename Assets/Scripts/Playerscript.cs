@@ -254,8 +254,8 @@ public class Playerscript : MonoBehaviour
 
     public GameObject rocketPrefab;
 
-    float specialCD = 15f;
-    float currentSpecialCD = 16f;
+    public float specialCD = 15f;
+    public float currentSpecialCD = 16f;
     void ShootSpecial()
     {
         if (currentSpecialCD > specialCD)
