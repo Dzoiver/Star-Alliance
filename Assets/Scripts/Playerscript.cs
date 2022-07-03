@@ -41,7 +41,6 @@ public class Playerscript : MonoBehaviour
     public Healthbar healthBar;
 
     AudioSource audioSource;
-    Transform sphereTrans;
     Quaternion startValue;
 
     private void Awake()
@@ -49,7 +48,6 @@ public class Playerscript : MonoBehaviour
         instance = this;
     }
     public AudioClip missiles;
-    // Start is called before the first frame update
     public Vector3 GetPos()
     {
         return transform.position;
@@ -60,7 +58,6 @@ public class Playerscript : MonoBehaviour
         healthBar.SetMaxHealth(maxhealth);
         sphereScript = attackSphere.GetComponent<SphereAttack>();
         startValue = transform.rotation;
-        sphereTrans = attackSphere.GetComponent<Transform>();
     }
     float timeElapsed = 0f;
     float lerpDuration = 0.6f;
@@ -70,7 +67,7 @@ public class Playerscript : MonoBehaviour
 
     bool isSpinning = false;
 
-    void Lerp()
+    void Lerp() // Speed up lerp while dodging
     {
         if (timeElapsed < lerpDuration)
         {
@@ -85,16 +82,12 @@ public class Playerscript : MonoBehaviour
         }
     }
     float time = 0;
-    void LerpFunction(Quaternion endValue, float duration)
+    void LerpFunction(Quaternion endValue, float duration) // Rotate the player's model while dodging
     {
         if (time < duration)
         {
             float rot = Mathf.Lerp(0, 360, time / duration);
-            // rb.MoveRotation(Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(movement), rotationSpeed * Time.deltaTime));
             _rb.MoveRotation(Quaternion.Euler(-90, 0, rot));
-            // transform.rotation = Quaternion.Euler(rot, 0, 0);
-
-            // transform.rotation = Quaternion.Lerp(startValue, endValue, time / duration);
             time += Time.deltaTime;
         }
         else
@@ -143,7 +136,6 @@ public class Playerscript : MonoBehaviour
 
         if (Input.GetKey("space") && gutlingLastFired > gutlingInterval)
         {
-            gutlingLastFired = 0f;
             ShootMissiles();
             PlaySound(missiles);
         }
@@ -274,10 +266,10 @@ public class Playerscript : MonoBehaviour
 
     void ShootMissiles()
     {
+        gutlingLastFired = 0f;
         GameObject projectileObject = Instantiate(projectilePrefab, _rb.position, Quaternion.identity);
         Projectile projectile = projectileObject.GetComponent<Projectile>();
         projectile.Launch(lookDirection, 300);
-
         // animator.SetTrigger("Launch");
     }
 
