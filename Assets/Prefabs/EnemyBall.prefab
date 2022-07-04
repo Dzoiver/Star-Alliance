@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2252290931905821582}
   - component: {fileID: 2179730898261645042}
   - component: {fileID: 2508730107313173334}
+  - component: {fileID: 2386758324500837989}
   m_Layer: 8
   m_Name: EnemyBall
   m_TagString: Untagged
@@ -129,3 +130,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.86, y: 0.8899999, z: 1.0263408}
   m_Center: {x: 0, y: 0, z: -0.01604657}
+--- !u!54 &2386758324500837989
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6138462629818652610}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

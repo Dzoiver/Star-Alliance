@@ -5,9 +5,12 @@ using UnityEngine;
 public class GameDirector : MonoBehaviour
 {
     static public int enemyCount = 0;
-    int enemyNumberSpawn = 0;
+    int enemyNumberSpawn = 3;
     float timewait = 0f;
-    float currentwait = 0f;
+    float currentwait = 1f;
+    int maxEnemies = 8;
+    int currentEnemies = 3;
+    bool waveSpawning = false;
     // Start is called before the first frame update
     Vector3 spawnVect = new Vector3(0, 0, 0);
     void Start()
@@ -18,38 +21,48 @@ public class GameDirector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (enemyCount <= 0)
+        if (enemyCount <= 0 && !waveSpawning)
         {
-            enemyNumberSpawn = Random.Range(1, 6);
-
-            for (int i = 0; i < enemyNumberSpawn; i++)
-            {
-                SpawnEnemy();
-                // StartCoroutine(CoroutineSpawn());
-            }
+            waveSpawning = true;
         }
+        if (waveSpawning && enemyCount > 1)
+            currentwait += Time.deltaTime;
+        else
+            currentwait = 10f;
 
-
-    }
-    IEnumerator CoroutineSpawn()
-    {
-        
-        // float rndTime = Random.Range(0.5f, 3f);
-        yield return new WaitForSeconds(5f);
-        
+        if (enemyCount < enemyNumberSpawn && currentwait > timewait && waveSpawning)
+        {
+            SpawnEnemy();
+            currentwait = 0f;
+            timewait = Random.Range(0f, 4f);
+        }
+        else if (enemyCount == enemyNumberSpawn)
+        {
+            waveSpawning = false;
+            if (enemyNumberSpawn < maxEnemies)
+                enemyNumberSpawn++;
+        }
     }
 
     public GameObject enemyPrefab;
     public GameObject enemyPos;
     public GameObject waypoint;
 
+    [SerializeField] Transform[] enemyPosArray;
+
     void SpawnEnemy()
     {
         enemyCount++;
         // enemyPos.transform.position = getRandomPos();
-        GameObject enemy = Instantiate(enemyPrefab, enemyPos.transform);
+        GameObject enemy = Instantiate(enemyPrefab, RandomPos());
         FlyingMachine machine = enemy.GetComponent<FlyingMachine>();
         machine.SetVectorToMove(Waypoints.instance.GetRandomWaypoint());
+    }
+
+    Transform RandomPos()
+    {
+        int randPos = Random.Range(0, enemyPosArray.Length-1);
+        return enemyPosArray[randPos];
     }
 
     Vector3 getRandomPos()

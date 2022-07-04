@@ -28,7 +28,7 @@ public class FlyingMachine : MonoBehaviour
     void Update()
     {
         currentTime += Time.deltaTime;
-        if (currentTime >= attackRate)
+        if (currentTime >= attackRate && transform.position.z == 0)
         {
             ShootMissiles();
             currentTime = 0f;
@@ -80,8 +80,6 @@ public class FlyingMachine : MonoBehaviour
     void ShootMissiles()
     {
         GameObject projectileObject = Instantiate(projectilePrefab, _rb.position + Vector3.down * 0.5f, Quaternion.identity);
-        enemyProjectile projectile = projectileObject.GetComponent<enemyProjectile>();
-        projectile.Launch(lookDirection, 300);
 
         // animator.SetTrigger("Launch");
     }
