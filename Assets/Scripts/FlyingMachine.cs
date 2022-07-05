@@ -10,7 +10,6 @@ public class FlyingMachine : Enemy
     float attackRate = 3f;
     float currentTime = 3f;
     public GameObject waypoint;
-    Vector3 lookDirection = new Vector3(0, -1, 0);
     public EnemyHPBar healthBar;
     float potionChance = 0.05f;
     float tempDmgChance = 0.05f;
@@ -80,11 +79,9 @@ public class FlyingMachine : Enemy
     void ShootMissiles()
     {
         GameObject projectileObject = Instantiate(projectilePrefab, _rb.position + Vector3.down * 0.5f, Quaternion.identity);
-
-        // animator.SetTrigger("Launch");
     }
 
-    public void TakeDamage(float damage)
+    public new void TakeDamage(float damage)
     {
         health -= damage;
         healthBar.SetHealth(health);

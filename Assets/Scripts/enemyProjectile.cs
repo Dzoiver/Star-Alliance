@@ -32,15 +32,11 @@ public class enemyProjectile : MonoBehaviour
 
     void Update()
     {
-        if (transform.position.magnitude > 70.0f)
+        if (transform.position.magnitude > 30.0f)
         {
             Destroy(gameObject);
         }
-        // moveDirection = (target - transform.position).normalized * speed;
         rb.velocity = normalizeDirection * speed;
-        // movevect.y = transform.position.y - speed * Time.deltaTime;
-        // transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
-        // transform.position = movevect;
     }
 
     private void OnTriggerEnter(Collider other)

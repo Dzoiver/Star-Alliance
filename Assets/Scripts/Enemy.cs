@@ -8,4 +8,12 @@ public class Enemy : MonoBehaviour
     {
 
     }
+
+    void DropItem(GameObject prefab)
+    {
+    }
+
+    public virtual void TakeDamage(float damage)
+    {
+    }
 }

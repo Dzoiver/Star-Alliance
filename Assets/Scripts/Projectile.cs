@@ -24,7 +24,7 @@ public class Projectile : MonoBehaviour
 
     void Update()
     {
-        if (transform.position.magnitude > 60.0f)
+        if (transform.position.magnitude > 30.0f)
         {
             Destroy(gameObject);
         }
@@ -35,7 +35,7 @@ public class Projectile : MonoBehaviour
 
     void OnTriggerEnter(Collider coll)
     {
-        FlyingMachine e = coll.GetComponent<FlyingMachine>();
+        Enemy e = coll.GetComponent<Enemy>();
         if (e != null)
         {
             e.TakeDamage(Playerscript.instance.gutlingDamage);
