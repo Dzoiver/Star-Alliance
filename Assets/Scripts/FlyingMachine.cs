@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlyingMachine : MonoBehaviour
+public class FlyingMachine : Enemy
 {
     Rigidbody _rb;
     float health = 4f;
