@@ -1,4 +1,5 @@
-# Star Alliance. The game is in early development stage.
+# Star Alliance
+The game currently is in early development stage.
 
 Defeat waves of enemies. More enemies with each wave.
 Collect bonuses and raise the score.
