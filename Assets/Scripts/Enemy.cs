@@ -15,5 +15,6 @@ public class Enemy : MonoBehaviour
 
     public virtual void TakeDamage(float damage)
     {
+        Debug.Log("is this?");
     }
 }

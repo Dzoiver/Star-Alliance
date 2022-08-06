@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlyingMachine : Enemy
+public class FlyingMachine : MonoBehaviour
 {
     Rigidbody _rb;
     float health = 4f;
@@ -81,7 +81,7 @@ public class FlyingMachine : Enemy
         GameObject projectileObject = Instantiate(projectilePrefab, _rb.position + Vector3.down * 0.5f, Quaternion.identity);
     }
 
-    public new void TakeDamage(float damage)
+    public void TakeDamage(float damage)
     {
         health -= damage;
         healthBar.SetHealth(health);

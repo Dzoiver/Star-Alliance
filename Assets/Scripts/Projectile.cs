@@ -35,11 +35,12 @@ public class Projectile : MonoBehaviour
 
     void OnTriggerEnter(Collider coll)
     {
-        Enemy e = coll.GetComponent<Enemy>();
+        FlyingMachine e = coll.GetComponent<FlyingMachine>();
         if (e != null)
         {
             e.TakeDamage(Playerscript.instance.gutlingDamage);
         }
+        
 
         Destroy(gameObject);
     }
