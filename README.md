@@ -4,6 +4,8 @@ The game currently is in early development stage.
 Defeat waves of enemies. More enemies with each wave.
 Collect bonuses and raise the score.
 
+Download demo (Windows): [current release](https://github.com/Dzoiver/Star-Alliance/releases/tag/v0.0.1-beta)
+
 ## Controls:
 #### Space - Shoot
 #### i - Melee Sphere Attack
